@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Prediction Result | Credit Card Eligibility Checker</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+
+  <body>
+    <section class="page-container">
+      <div class="result-wrapper fade-in">
+        <div
+          class="result-card {% if prediction == 'Approved' %}success-card{% else %}danger-card{% endif %}"
+        >
+          <div
+            class="status-icon {% if prediction == 'Approved' %}success{% else %}danger{% endif %}"
+          >
+            {% if prediction == "Approved" %} 💳 {% else %} 💳 {% endif %}
+          </div>
+
+          <h1
+            class="{% if prediction == 'Approved' %}success-text{% else %}danger-text{% endif %}"
+          >
+            {% if prediction == "Approved" %} Credit Card Approved {% else %}
+            Credit Card Not Approved {% endif %}
+          </h1>
+
+          <p class="result-message">
+            {% if prediction == "Approved" %} Congratulations! The applicant is
+            likely to qualify for a credit card. {% else %} The applicant
+            currently does not satisfy the approval criteria. {% endif %}
+          </p>
+
+          <div class="confidence-card">
+            <h3>Prediction Confidence</h3>
+
+            <div class="confidence-score">{{ confidence }}%</div>
+          </div>
+
+          {% if prediction == "Approved" %}
+
+          <div class="recommendation-box success-box">
+            <h3>Why was it approved?</h3>
+
+            <ul class="result-list">
+              <li>✅ Stable employment profile</li>
+              <li>✅ Good annual income</li>
+              <li>✅ Low financial risk indicators</li>
+              <li>✅ Applicant meets the eligibility criteria</li>
+            </ul>
+          </div>
+
+          {% else %}
+
+          <div class="recommendation-box danger-box">
+            <h3>Why was it rejected?</h3>
+
+            <ul class="result-list">
+              <li>❌ Annual income is below the preferred range</li>
+              <li>❌ Employment profile needs improvement</li>
+              <li>❌ Higher financial risk detected</li>
+              <li>❌ Additional review is recommended</li>
+            </ul>
+          </div>
+
+          {% endif %}
+
+          <div class="button-group">
+            <a href="/predict" class="primary-btn"> Check Another Applicant </a>
+
+            <a href="/" class="secondary-btn"> Back to Dashboard </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

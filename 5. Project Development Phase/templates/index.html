@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Check Eligibility | Credit Card Approval</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+
+  <body>
+    <!-- ================= PAGE ================= -->
+
+    <section class="page-container">
+      <div class="form-wrapper fade-in">
+        <div class="form-header">
+          <div>
+            <h1>Credit Card Eligibility Form</h1>
+
+            <p>
+              Complete the application below to check whether you are likely to
+              qualify for a credit card.
+            </p>
+          </div>
+
+          <button type="button" id="autofillBtn" class="secondary-btn">
+            Autofill Sample
+          </button>
+        </div>
+
+        <form action="/result" method="POST">
+          <!-- ================= PERSONAL INFORMATION ================= -->
+
+          <div class="section-card">
+            <h2>👤 Personal Information</h2>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Gender</label>
+
+                <select name="f1">
+                  <option value="1">Male</option>
+
+                  <option value="0">Female</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Age (Years)</label>
+
+                <input
+                  type="number"
+                  id="age"
+                  name="age"
+                  placeholder="e.g. 28"
+                  min="18"
+                  max="100"
+                  required
+                />
+
+                <input type="hidden" name="f10" id="birthDays" value="" />
+              </div>
+
+              <div class="form-group">
+                <label>Marital Status</label>
+
+                <select name="f8">
+                  <option value="1">Married</option>
+
+                  <option value="3">Single</option>
+
+                  <option value="0">Civil Marriage</option>
+
+                  <option value="2">Separated</option>
+
+                  <option value="4">Widow</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Number of Children</label>
+
+                <input type="number" name="f4" min="0" value="0" required />
+              </div>
+
+              <div class="form-group">
+                <label>Family Members</label>
+
+                <input type="number" name="f17" min="1" step="1" required />
+              </div>
+              <div class="form-group">
+                <label>Highest Education</label>
+
+                <select name="f7">
+                  <option value="4">Secondary / Secondary Special</option>
+
+                  <option value="1">Higher Education</option>
+
+                  <option value="2">Incomplete Higher</option>
+
+                  <option value="3">Lower Secondary</option>
+
+                  <option value="0">Academic Degree</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= EMPLOYMENT ================= -->
+
+          <div class="section-card">
+            <h2>💼 Employment & Income</h2>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Employment Type</label>
+
+                <!-- No name attribute here -->
+                <select name="f6" id="employment_status">
+                  <option value="4">Working</option>
+                  <option value="0">Commercial Associate</option>
+                  <option value="2">State Servant</option>
+                  <option value="3">Student</option>
+                  <option value="1">Pensioner</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Occupation</label>
+
+                <select name="f16" id="occupation">
+                  <option value="10">Managers</option>
+                  <option value="8">Laborers</option>
+                  <option value="14">Sales Staff</option>
+                  <option value="3">Core Staff</option>
+                  <option value="0">Accountants</option>
+                  <option value="4">Drivers</option>
+                  <option value="6">High Skill Tech Staff</option>
+                  <option value="11">Medicine Staff</option>
+                  <option value="16">Security Staff</option>
+                  <option value="12">Private Service Staff</option>
+                  <option value="2">Cooking Staff</option>
+                  <option value="1">Cleaning Staff</option>
+                  <option value="5">HR Staff</option>
+                  <option value="13">Realty Agents</option>
+                  <option value="15">Secretaries</option>
+                  <option value="18">Waiters / Barmen</option>
+                  <option value="9">Low Skill Laborers</option>
+                  <option value="7">IT Staff</option>
+                  <option value="17">Unknown</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Annual Income (₹)</label>
+
+                <input
+                  type="number"
+                  name="f5"
+                  placeholder="e.g. 600000"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Years of Employment</label>
+
+                <input
+                  type="number"
+                  id="yearsWorked"
+                  name="yearsWorked"
+                  min="0"
+                  placeholder="e.g. 5"
+                />
+
+                <input type="hidden" name="f11" id="employmentDays" value="" />
+              </div>
+            </div>
+          </div>
+          <!-- ================= RESIDENCE ================= -->
+
+          <div class="section-card">
+            <h2>🏠 Residence Information</h2>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Owns a Car?</label>
+
+                <select name="f2">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Owns a House?</label>
+
+                <select name="f3">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Housing Type</label>
+
+                <select name="f9">
+                  <option value="1">House / Apartment</option>
+                  <option value="4">Rented Apartment</option>
+                  <option value="2">Municipal Apartment</option>
+                  <option value="5">With Parents</option>
+                  <option value="0">Co-op Apartment</option>
+                  <option value="3">Office Apartment</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hidden feature required by the model -->
+
+          <input type="hidden" name="f12" value="1" />
+
+          <!-- ================= CONTACT ================= -->
+
+          <div class="section-card">
+            <h2>📞 Contact Information</h2>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Has Work Phone?</label>
+
+                <select name="f13">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Has Home Phone?</label>
+
+                <select name="f14">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Has Email?</label>
+
+                <select name="f15">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= BUTTONS ================= -->
+
+          <div class="button-group">
+            <button type="submit" class="primary-btn">Check Eligibility</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script>
+      // ---------------- AGE TO DAYS ----------------
+
+      const ageInput = document.getElementById("age");
+      const birthDays = document.getElementById("birthDays");
+
+      ageInput.addEventListener("input", () => {
+        if (ageInput.value === "") {
+          birthDays.value = "";
+          return;
+        }
+
+        birthDays.value = -(parseInt(ageInput.value) * 365);
+      });
+
+      // ---------------- EMPLOYMENT YEARS TO DAYS ----------------
+
+      const yearsWorked = document.getElementById("yearsWorked");
+      const employmentDays = document.getElementById("employmentDays");
+
+      yearsWorked.addEventListener("input", () => {
+        if (yearsWorked.value === "") {
+          employmentDays.value = "";
+          return;
+        }
+
+        employmentDays.value = -(parseInt(yearsWorked.value) * 365);
+      });
+
+      // ---------------- EMPLOYMENT TYPE ----------------
+
+      const employmentStatus = document.getElementById("employment_status");
+      const occupation = document.getElementById("occupation");
+
+      employmentStatus.addEventListener("change", function () {
+        if (this.value == "3" || this.value == "1") {
+          occupation.value = "17";
+          occupation.style.pointerEvents = "none";
+          occupation.style.background = "#f5f5f5";
+
+          yearsWorked.value = "";
+          yearsWorked.disabled = true;
+
+          employmentDays.value = 365243;
+        } else {
+          occupation.style.pointerEvents = "auto";
+          occupation.style.background = "";
+          yearsWorked.disabled = false;
+        }
+      });
+
+      // ---------------- AUTOFILL SAMPLE ----------------
+
+      document
+        .getElementById("autofillBtn")
+        .addEventListener("click", function () {
+          document.querySelector("[name='f1']").value = "1";
+          document.querySelector("[name='f2']").value = "1";
+          document.querySelector("[name='f3']").value = "1";
+          document.querySelector("[name='f4']").value = "1";
+          document.querySelector("[name='f5']").value = "650000";
+
+          document.querySelector("[name='f6']").value = "4";
+          document.querySelector("[name='f7']").value = "1";
+          document.querySelector("[name='f8']").value = "1";
+          document.querySelector("[name='f9']").value = "1";
+
+          document.querySelector("[name='f12']").value = "1";
+          document.querySelector("[name='f13']").value = "1";
+          document.querySelector("[name='f14']").value = "1";
+          document.querySelector("[name='f15']").value = "1";
+          document.querySelector("[name='f17']").value = "3";
+
+          ageInput.value = 29;
+          birthDays.value = -(29 * 365);
+
+          employmentStatus.value = "4";
+
+          employmentStatus.dispatchEvent(new Event("change"));
+
+          occupation.value = "7";
+
+          yearsWorked.value = 5;
+          employmentDays.value = -(5 * 365);
+        });
+    </script>
+  </body>
+</html>
